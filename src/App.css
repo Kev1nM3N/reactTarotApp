@@ -814,12 +814,12 @@ LARGE AND SMALL MOBILE DEVICES
 
 @media (max-width: 1250px) {
     .searchbar {
-        padding: 0 14rem 0 30px;
+        padding: 0 12rem 0 30px;
     }
     
     .searchbarButton {
         padding: 0.8rem 4.2rem;
-        right: 4.1rem;
+        right: 4.4rem;
     }
 }
 
