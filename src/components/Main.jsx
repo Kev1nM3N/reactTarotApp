@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import tarotBackDesign from "../assets/Tarot back design.jpg";
 import Footer from "./Footer";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import cardImageMapping from "../cardImageMapping";
@@ -14,7 +14,7 @@ function Main({ toggleModal }) {
   const [filteredCards, setFilteredCards] = useState([]);
   const [filter, setFilter] = useState(""); // State to store the filter value
   const navigate = useNavigate();
-  let mainSearchBar = document.querySelector(".mainSearchBar")
+  const searchBarRef = useRef(null);
 
   async function fetchCards(searchTerm = '') {
     const response = await axios.get("https://tarotapi.dev/api/v1/cards");
@@ -39,6 +39,7 @@ function Main({ toggleModal }) {
       ...newMajorCards,
       ...allCards.filter((card) => card.type !== "major"),
     ];
+    setCards(mergedCards); //moved this here to keep the just created mergedCards
     let minorMergedCards = mergedCards.filter(
       (element) => element.type === "minor"
     );
@@ -67,8 +68,17 @@ function Main({ toggleModal }) {
       );
     }
 
-    setCards(mergedCards);
-    setFilteredCards(mergedCards); // Initialize filteredCards with all cards
+    setFilteredCards([...mergedCards]); // Initialize filteredCards with a new copy of all modified cards
+  }
+
+  function handleFilterChange(event) {
+    setFilter(event.target.value);
+  }
+
+  function singleCardSearch() {
+    const searchBarValue = searchBarRef.current.value;
+    navigate(`/main`);
+    fetchCards(searchBarValue);
   }
 
   useEffect(() => {
@@ -85,8 +95,7 @@ function Main({ toggleModal }) {
   useEffect(() => {
     let filtered = cards;
     if (filter === "ALL") {
-      mainSearchBar.value = "";
-      filtered = cards
+      filtered = cards;
       console.log(filtered);
     } else if (filter === "MAJOR") {
       filtered = cards.filter((card) => card.type === "major");
@@ -95,8 +104,9 @@ function Main({ toggleModal }) {
     } else if (filter === "FACE") {
       filtered = cards.filter((card) => card.category === "court");
     }
+    searchBarRef.current.value = "";
     setFilteredCards(filtered);
-  }, [filter, cards]);
+  }, [filter]);
 
   useEffect(() => {
     if (query) {
@@ -107,21 +117,11 @@ function Main({ toggleModal }) {
     }
   }, [query, cards]);
 
-  function handleFilterChange(event) {
-    setFilter(event.target.value);
-  }
-
-  function singleCardSearch() {
-    const searchBar = document.querySelector('.mainSearchBar');
-    const searchBarValue = searchBar.value;
-    navigate(`/main`);
-    fetchCards(searchBarValue);
-  }
 
   return (
     <>
         <div className="mainSearchBox">
-            <input onKeyDown={(event) => {
+            <input ref={searchBarRef} onKeyDown={(event) => {
               if (event.key === 'Enter'){
                 singleCardSearch()
               }
@@ -174,4 +174,3 @@ function Main({ toggleModal }) {
 }
 
 export default Main;
-
