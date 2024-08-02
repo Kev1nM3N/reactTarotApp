@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useRef } from "react";
 import profilePic from '../assets/Kevin AI.jpeg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import emailjs from "@emailjs/browser";
 
 function Modal({ toggleModal }) {
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    const loading = document.querySelector(`.modal__overlay--loading`);
+    const success = document.querySelector(`.modal__overlay--success`);
+    loading.classList += ` modal__overlay--visible`
+
+    emailjs.sendForm('service_jrkdgnb', 'template_57i7q9q', form.current, 'zB9fmdo_XchCWnTVO')
+      .then((result) => {
+          console.log(result.text);
+          loading.classList.remove(`modal__overlay--visible`);
+          success.classList += ` modal__overlay--visible`
+      }, (error) => {
+          console.log(error.text);
+          loading.classList.remove(`modal__overlay--visible`);
+          alert(`The email service is temporaily unavailable. Please contact me directly at mediaman501@outlook.com`);
+      });
+  };
+
   return (
     <div className="modal">
       <div className="modal__half modal__about">
@@ -71,7 +92,7 @@ function Modal({ toggleModal }) {
         <h4 className="modal__sub-title modal__sub-title--contact">
           I'm Currently Open To New Opportunities
         </h4>
-        <form onSubmit={null} id="contact__form">
+        <form ref={form} onSubmit={sendEmail} id="contact__form">
           <div className="form__item">
             <label className="form__item--label">Name</label>
             <input type="text" name="user_name" className="input"></input>
@@ -92,10 +113,10 @@ function Modal({ toggleModal }) {
           <button className="form__submit">Send</button>
         </form>
         <div className="modal__overlay modal__overlay--loading">
-          <i className="fas fa-spinner"></i>
+            <FontAwesomeIcon icon="fa-solid fa-spinner"/>
         </div>
         <div className="modal__overlay modal__overlay--success">
-          Thanks! Looking forward to speaking with you soon!
+          Thank you! Looking forward to speaking with you soon!
         </div>
       </div>
     </div>

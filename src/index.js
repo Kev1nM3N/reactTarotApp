@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './App.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Library, library } from '@fortawesome/fontawesome-svg-core';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import { faXmark, faBars, faArrowUp, faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faXmark, faBars, faArrowUp, faSpinner)

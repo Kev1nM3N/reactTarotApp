@@ -405,6 +405,11 @@ label {
 .modal__overlay--loading {
     background-color: #242424;
     font-size: 80px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .modal__overlay--success {
