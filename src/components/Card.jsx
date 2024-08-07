@@ -1,12 +1,18 @@
 import React, { useEffect } from "react";
+import tarotBackDesign from "../assets/Tarot back design.jpg";
 import tarotDeath from "../assets/Death.jpg";
 import { useParams, useLocation, Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import Footer from "./Footer";
 
+//I think on main, we should create a new property for the cards just called value number or
+/**
+ * something so that each card is unique.
+ */
+
 function Card() {
-  const grabURL = useParams();
+  const grabURLID = useParams();
 
   return (
     <div id="cardPage">
@@ -21,25 +27,29 @@ function Card() {
               <h1 className="aboutTitle">About</h1>
             </div>
             <div className="card__selected">
-              <figure className="card__selected--figure">
-                <img src={tarotDeath} alt="" className="card__selected--img" />
-              </figure>
-              <div className="card__selected--description">
-                <h2 className="card__selected--title">Death</h2>
-                <div className="card__summary">
-                  <h3 className="card__summary--title">Summary</h3>
-                  <p className="card__summary--para">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Cum repellat expedita necessitatibus ea aliquam voluptatibus
-                    commodi illo, est nam quis quisquam, labore ullam. Possimus
-                    alias et nobis vitae, dolorem fuga!
-                  </p>
-                  <p className="card__summary--para">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Cum repellat expedita necessitatibus ea aliquam voluptatibus
-                    commodi illo, est nam quis quisquam, labore ullam. Possimus
-                    alias et nobis vitae, dolorem fuga!
-                  </p>
+              <div className="card__selected--leftBox">
+                <figure className="card__selected--figure">
+                  <img src={tarotDeath} alt="" className="card__selected--img" />
+                </figure>
+              </div>
+              <div className="card__selected--rightBox">
+                <div className="card__selected--description">
+                  <h2 className="card__selected--title">Death</h2>
+                  <div className="card__summary">
+                    <h3 className="card__summary--title">Summary</h3>
+                    <p className="card__summary--para">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      Cum repellat expedita necessitatibus ea aliquam voluptatibus
+                      commodi illo, est nam quis quisquam, labore ullam. Possimus
+                      alias et nobis vitae, dolorem fuga!
+                    </p>
+                    <p className="card__summary--para">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                      Cum repellat expedita necessitatibus ea aliquam voluptatibus
+                      commodi illo, est nam quis quisquam, labore ullam. Possimus
+                      alias et nobis vitae, dolorem fuga!
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -49,12 +59,44 @@ function Card() {
         <div className="cards__container">
           <div className="row">
             <div className="card__selected--top">
-              <h2 className="card__selected--title--top">Recommended Cards</h2>
+              <h2 className="card__selected--title--top"><i>Recommended Cards</i></h2>
             </div>
             <div className="cards">
-              {" "}
-              {/* Assuming Cards component exists and renders cards */}
-              {/* Logic to filter and display recommended cards remains the same */}
+              <div className="cardRec">
+                <figure className="card__container">
+                  <img src={tarotBackDesign} alt="" className="tarot__frontimg"/>
+                  <img src={tarotDeath} className="tarot__backimg" alt="" />
+                </figure>
+                <p className="card__name">Death</p>
+              </div>
+              <div className="cardRec">
+                <figure className="card__container">
+                  <img src={tarotBackDesign} alt="" className="tarot__frontimg"/>
+                  <img src={tarotDeath} className="tarot__backimg" alt="" />
+                </figure>
+                <p className="card__name">Death</p>
+              </div>
+              <div className="cardRec">
+                <figure className="card__container">
+                  <img src={tarotBackDesign} alt="" className="tarot__frontimg"/>
+                  <img src={tarotDeath} className="tarot__backimg" alt="" />
+                </figure>
+                <p className="card__name">Death</p>
+              </div>
+              <div className="cardRec">
+                <figure className="card__container">
+                  <img src={tarotBackDesign} alt="" className="tarot__frontimg"/>
+                  <img src={tarotDeath} className="tarot__backimg" alt="" />
+                </figure>
+                <p className="card__name">Death</p>
+              </div>
+              <div className="cardRec">
+                <figure className="card__container">
+                  <img src={tarotBackDesign} alt="" className="tarot__frontimg"/>
+                  <img src={tarotDeath} className="tarot__backimg" alt="" />
+                </figure>
+                <p className="card__name">Death</p>
+              </div>
             </div>
           </div>
         </div>

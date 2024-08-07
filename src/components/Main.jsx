@@ -3,12 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import tarotBackDesign from "../assets/Tarot back design.jpg";
 import Footer from "./Footer";
 import { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import cardImageMapping from "../cardImageMapping";
 import { useNavigate } from 'react-router-dom';
 
-function Main({ toggleModal }) {
+function Main({ toggleModal, scrollToTop }) {
   const { query } = useParams();
   const [cards, setCards] = useState([]);
   const [filteredCards, setFilteredCards] = useState([]);
@@ -150,14 +150,16 @@ function Main({ toggleModal }) {
             <div className="card__list">
               {filteredCards.map((card) => (
                 <div key={card.name_short} className="card">
-                  <figure className="card__img--wrapper">
-                    <img
-                      src={tarotBackDesign}
-                      alt=""
-                      className="tarot__frontimg"
-                    />
-                    <img src={card.image} alt="" className="tarot__backimg" />
-                  </figure>
+                  <Link onClick={scrollToTop} to={`/${card.value_int}`}>
+                    <figure className="card__img--wrapper">
+                      <img
+                        src={tarotBackDesign}
+                        alt=""
+                        className="tarot__frontimg"
+                      />
+                      <img src={card.image} alt="" className="tarot__backimg" />
+                    </figure>
+                  </Link>
 
                   <p className="tarot__name">{card.name}</p>
                   <p className="tarot__category">{card.type.toUpperCase()}</p>
@@ -168,7 +170,7 @@ function Main({ toggleModal }) {
           </div>
         </div>
       </main>
-      <Footer toggleModal={toggleModal} />
+      <Footer toggleModal={toggleModal} scrollToTop={scrollToTop} />
     </>
   );
 }

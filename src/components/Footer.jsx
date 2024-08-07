@@ -1,23 +1,25 @@
 import React from 'react'
 import profilePic from '../assets/Kevin AI.jpeg'
 import KDLogo from '../assets/KD-left-transparent-png.png'
-import upArrow from '../assets/Up arrow.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
-function Footer({toggleModal}) {
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
+function Footer({toggleModal, scrollToTop}) {
+    const location = useLocation();
 
     const handleContactClick = () => {
         scrollToTop();
         toggleModal();
     };
 
+    const navStyle = {
+        backgroundColor: location.pathname === ":id" ? "#fce7f3" : "initial"
+        //how do we fix this?
+    };
+
   return (
-    <footer>
+    <footer style={navStyle}>
         <div className="container">
             <div className="row footer__row">
                 <Link to={null} onClick={scrollToTop} className="footer__anchor">

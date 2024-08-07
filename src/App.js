@@ -16,15 +16,19 @@ function App() {
     document.body.classList += ` modal--open`;
   }
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <Router>
       <section>
         <Nav toggleModal={toggleModal}/>
         <Routes>
           <Route path="/" element={<Home />}/>
-          <Route path=":id" element={<Card />}/>
+          <Route path="/:id" element={<Card />}/>
           <Route path="/search/:query" element={<Main />} />
-          <Route path="/main" element={<Main toggleModal={toggleModal} />}/>
+          <Route path="/main" element={<Main toggleModal={toggleModal} scrollToTop={scrollToTop} />}/>
         </Routes>
       </section>
     </Router>
