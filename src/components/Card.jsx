@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import tarotBackDesign from "../assets/Tarot back design.jpg";
 import tarotDeath from "../assets/Death.jpg";
 import { useParams, useLocation, Link } from "react-router-dom";
@@ -6,13 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import Footer from "./Footer";
 
-//I think on main, we should create a new property for the cards just called value number or
-/**
- * something so that each card is unique.
- */
-
-function Card() {
+function Card({ cardImageMapping }) {
   const grabURLID = useParams();
+
+  
 
   return (
     <div id="cardPage">

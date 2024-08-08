@@ -5,10 +5,9 @@ import Footer from "./Footer";
 import { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-import cardImageMapping from "../cardImageMapping";
 import { useNavigate } from 'react-router-dom';
 
-function Main({ toggleModal, scrollToTop }) {
+function Main({ toggleModal, scrollToTop, cardImageMapping }) {
   const { query } = useParams();
   const [cards, setCards] = useState([]);
   const [filteredCards, setFilteredCards] = useState([]);
@@ -26,13 +25,12 @@ function Main({ toggleModal, scrollToTop }) {
     storeIn[0].value = "0";
     onlyMajorCards.unshift(storeIn[0]);
     onlyMajorCards.find((element) =>
-      element.name === "Fortitude" ? (element.name = "Strength") : null
+      element.name === "Fortitude" && (element.name = "Strength")
     );
     onlyMajorCards.find((element) =>
-      element.name === "The Last Judgment"
-        ? (element.name = "Judgement")
-        : null
+      element.name === "The Last Judgment" && (element.name = "Judgement")
     );
+    
     let newMajorCards = onlyMajorCards;
 
     let mergedCards = [
@@ -50,9 +48,11 @@ function Main({ toggleModal, scrollToTop }) {
       }
     });
 
-    let faceMergedCards = minorMergedCards.filter(
-      (element) => element.category
-    );
+    for (let i = 0; i < mergedCards.length; i++){
+      mergedCards[i].numberedOrder = i
+    }
+
+    console.log(mergedCards);
 
     // NOW ADDING IMAGES TO EVERY CARD
 
@@ -150,7 +150,7 @@ function Main({ toggleModal, scrollToTop }) {
             <div className="card__list">
               {filteredCards.map((card) => (
                 <div key={card.name_short} className="card">
-                  <Link onClick={scrollToTop} to={`/${card.value_int}`}>
+                  <Link onClick={scrollToTop} to={`/${card.numberedOrder}`}>
                     <figure className="card__img--wrapper">
                       <img
                         src={tarotBackDesign}
