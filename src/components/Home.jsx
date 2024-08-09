@@ -1,7 +1,6 @@
 import React from 'react'
 import crystalBall from '../assets/tarot with crystal ball display.png'
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 
 function Home() {
     const navigate = useNavigate();

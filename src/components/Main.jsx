@@ -1,13 +1,12 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import tarotBackDesign from "../assets/Tarot back design.jpg";
-import Footer from "./Footer";
 import { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
-function Main({ toggleModal, scrollToTop, cardImageMapping }) {
+function Main({ scrollToTop, cardImageMapping }) {
   const { query } = useParams();
   const [cards, setCards] = useState([]);
   const [filteredCards, setFilteredCards] = useState([]);
@@ -170,7 +169,6 @@ function Main({ toggleModal, scrollToTop, cardImageMapping }) {
           </div>
         </div>
       </main>
-      <Footer toggleModal={toggleModal} scrollToTop={scrollToTop} />
     </>
   );
 }

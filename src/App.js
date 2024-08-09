@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import Card from "./components/Card";
 import Main from "./components/Main";
 import Nav from "./components/Nav";
+import Footer from "./components/Footer.jsx";
 
 function App() {
   let [modalOpen, setModalOpen] = useState(false);
@@ -27,11 +28,13 @@ function App() {
         <Nav toggleModal={toggleModal}/>
         <Routes>
           <Route path="/" element={<Home />}/>
-          <Route path="/:id" element={<Card cardImageMapping={cardImageMapping}/>}/>
-          <Route path="/search/:query" element={<Main />} />
+          <Route path="/:id" element={<Card cardImageMapping={cardImageMapping} scrollToTop={scrollToTop}/>}/>
+          <Route path="/search/:query" element={<Main toggleModal={toggleModal} scrollToTop={scrollToTop}
+           cardImageMapping={cardImageMapping}/>} />
           <Route path="/main" element={<Main toggleModal={toggleModal}
            scrollToTop={scrollToTop} cardImageMapping={cardImageMapping} />}/>
         </Routes>
+        <Footer toggleModal={toggleModal} scrollToTop={scrollToTop}/>
       </section>
     </Router>
   );

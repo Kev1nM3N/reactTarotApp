@@ -3,23 +3,16 @@ import profilePic from '../assets/Kevin AI.jpeg'
 import KDLogo from '../assets/KD-left-transparent-png.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function Footer({toggleModal, scrollToTop}) {
-    const location = useLocation();
-
     const handleContactClick = () => {
         scrollToTop();
         toggleModal();
     };
 
-    const navStyle = {
-        backgroundColor: location.pathname === ":id" ? "#fce7f3" : "initial"
-        //how do we fix this?
-    };
-
   return (
-    <footer style={navStyle}>
+    <footer>
         <div className="container">
             <div className="row footer__row">
                 <Link to={null} onClick={scrollToTop} className="footer__anchor">
@@ -27,7 +20,6 @@ function Footer({toggleModal, scrollToTop}) {
                         <img className="footer__logo--img" src={KDLogo} alt=""/>
                     </figure>
                     <span className="top">
-                        {/* <img className="upArrow" src={upArrow} alt="arrow"/> */}
                         <FontAwesomeIcon icon={faArrowUp} className='upArrow' alt="uparrow"/>
                     </span>
                 </Link>

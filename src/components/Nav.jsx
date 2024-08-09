@@ -7,18 +7,14 @@ import Modal from "./Modal";
 import Backdrop from "./Backdrop";
 
 function Nav({ toggleModal }) {
+  const location = useLocation();
+
   function openMenu (){
     document.body.classList += (` menu__open`)
 }
 
-const location = useLocation();
-
-const navStyle = {
-  backgroundColor: location.pathname.startsWith("/main") || location.pathname.startsWith("/search") ? "#fff8e7" : "initial"
-};
-
   return (
-    <nav style={navStyle}>
+    <nav>
       <div className="left-side">
         <img
           className="headerLogo"
